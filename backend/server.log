@@ -1,0 +1,80 @@
+nohup: ignoring input
+[22:12:28] INFO     Loading OMRChecker modules...                  __init__.py:5
+           INFO     Loading processors from "src.processors"...    manager.py:53
+           INFO     Loaded processors: ['CropOnMarkers',           manager.py:76
+                    'CropPage', 'FeatureBasedAlignment',                        
+                    'GaussianBlur', 'Levels', 'MedianBlur']                     
+INFO:     Started server process [125702]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:57820 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51040 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58550 - "GET /api/omr/status/batch_20251024_220700 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58550 - "GET /api/omr/status/batch_20251024_220700 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58550 - "GET /api/omr/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58550 - "GET /api/omr/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "POST /api/omr/upload HTTP/1.1" 200 OK
+[22:13:12] INFO     Loading config.json:                       validations.py:84
+                    /home/snehal-reddy/Coding/Repositories                      
+                    /qr/OMRChecker-1/backend/storage/template/                  
+                    config.json                                                 
+           INFO     Loading template.json:                     validations.py:49
+                    /home/snehal-reddy/Coding/Repositories                      
+                    /qr/OMRChecker-1/backend/storage/template/                  
+                    template.json                                               
+           INFO     Loading evaluation.json:                   validations.py:20
+                    /home/snehal-reddy/Coding/Repositories                      
+                    /qr/OMRChecker-1/backend/storage/template/                  
+                    evaluation.json                                             
+┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Key                     ┃ Error                                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ marking_schemes.DEFAULT │ 'DEFAULT' is a required property. Make sure the    │
+│                         │ spelling of the key is correct                     │
+└─────────────────────────┴────────────────────────────────────────────────────┘
+Worker error: Provided Evaluation JSON is Invalid: '/home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/template/evaluation.json'
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40182 - "GET /api/omr/status/batch_20251024_221312 HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [125702]

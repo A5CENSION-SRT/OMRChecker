@@ -1,0 +1,21 @@
+{
+  "batchId": "batch_20251024_224149",
+  "status": "completed",
+  "totalFiles": 1,
+  "processed": 0,
+  "processing": 0,
+  "pending": 0,
+  "failed": 1,
+  "queuedAt": "2025-10-24T22:41:49.329413",
+  "startedAt": "2025-10-24T22:41:49.330574",
+  "completedAt": "2025-10-24T22:41:54.486706",
+  "files": [
+    {
+      "fileName": "rgb-100-gsm.jpg",
+      "status": "failed",
+      "score": 0,
+      "percentage": 0,
+      "error": "OpenCV(4.12.0) /io/opencv/modules/imgcodecs/src/loadsave.cpp:1051: error: (-2:Unspecified error) could not find a writer for the specified extension in function 'imwrite_'\n"
+    }
+  ]
+}
