@@ -9,9 +9,9 @@ from pathlib import Path
 from typing import Dict, List
 from datetime import datetime
 
-from utils.omr_helper import get_omr_processor
-from utils.csv_helper import append_result_to_csv
-from config import BATCHES_DIR, RESULTS_DIR
+from backend.utils.omr_helper import get_omr_processor
+from backend.utils.csv_helper import append_result_to_csv
+from backend.config import BATCHES_DIR, RESULTS_DIR
 
 # Get logger (configured in main.py)
 logger = logging.getLogger(__name__)

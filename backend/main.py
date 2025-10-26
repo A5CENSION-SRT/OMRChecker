@@ -20,8 +20,8 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from config import settings, RESULTS_DIR
-from routes.omr import router as omr_router
+from backend.config import settings, RESULTS_DIR
+from backend.routes.omr import router as omr_router
 
 # Create FastAPI app
 app = FastAPI(
@@ -72,7 +72,7 @@ async def health_check():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(
-        "main:app",
+        "backend.main:app",
         host="0.0.0.0",
         port=8000,
         reload=True,

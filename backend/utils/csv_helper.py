@@ -6,9 +6,11 @@ import logging
 from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Optional
+from collections import OrderedDict
+import re
 import pandas as pd
 
-from config import RESULTS_DIR, RESULTS_CSV_NAME
+from backend.config import RESULTS_DIR, RESULTS_CSV_NAME
 
 # Get logger (configured in main.py)
 logger = logging.getLogger(__name__)
@@ -64,6 +66,28 @@ def append_result_to_csv(batch_id: str, result: Dict):
     logger.info(f"💾 Appending result to CSV: {result.get('fileName', 'unknown')}")
     
     # Prepare row data
+    # Ensure responses are written with questions in a predictable order
+    responses = result.get("responses", {}) or {}
+    ordered_responses = OrderedDict()
+
+    # Put Roll first if present
+    if isinstance(responses, dict) and "Roll" in responses:
+        ordered_responses["Roll"] = responses["Roll"]
+
+    if isinstance(responses, dict):
+        # Sort remaining keys by numeric part if available (q1, q2, ...), fallback to lexical
+        other_keys = [k for k in responses.keys() if k != "Roll"]
+
+        def _sort_key(k):
+            m = re.search(r"(\d+)", k)
+            return int(m.group(1)) if m else float("inf")
+
+        for k in sorted(other_keys, key=_sort_key):
+            ordered_responses[k] = responses[k]
+    else:
+        # Not a dict (already a string or list), store as-is
+        ordered_responses = responses
+
     row = {
         "batchId": batch_id,
         "fileName": result.get("fileName", ""),
@@ -75,7 +99,7 @@ def append_result_to_csv(batch_id: str, result: Dict):
         "score": result.get("score", 0),
         "maxScore": result.get("maxScore", 0),
         "percentage": result.get("percentage", 0),
-        "responses": json.dumps(result.get("responses", {})),
+    "responses": json.dumps(ordered_responses, ensure_ascii=False),
         "markedImagePath": result.get("markedImagePath", ""),
         "status": result.get("status", "unknown"),
         "createdAt": result.get("processedAt", datetime.now().isoformat()),
@@ -127,14 +151,14 @@ def get_batch_results(batch_id: str) -> List[Dict]:
             elif isinstance(value, float) and (value == float('inf') or value == float('-inf')):
                 result[key] = 0
         
-        # Parse JSON responses
+        # Parse JSON responses preserving order
         if pd.notna(result.get("responses")) and result.get("responses"):
             try:
-                result["responses"] = json.loads(result["responses"])
+                result["responses"] = json.loads(result["responses"], object_pairs_hook=OrderedDict)
             except:
-                result["responses"] = {}
+                result["responses"] = OrderedDict()
         else:
-            result["responses"] = {}
+            result["responses"] = OrderedDict()
         
         results.append(result)
     

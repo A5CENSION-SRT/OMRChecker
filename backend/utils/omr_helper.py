@@ -15,7 +15,7 @@ from src.evaluation import EvaluationConfig
 from src.utils.parsing import get_concatenated_response, open_config_with_defaults
 from src.core import ImageInstanceOps
 
-from config import TEMPLATE_JSON, ANSWER_KEY_JSON, CONFIG_JSON
+from backend.config import TEMPLATE_JSON, ANSWER_KEY_JSON, CONFIG_JSON
 
 
 class OMRProcessor:

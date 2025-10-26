@@ -11,14 +11,14 @@ from typing import List
 from fastapi import APIRouter, File, HTTPException, UploadFile, BackgroundTasks
 from fastapi.responses import FileResponse
 
-from config import UPLOADS_DIR, RESULTS_DIR, BATCHES_DIR, ALLOWED_EXTENSIONS, MAX_FILE_SIZE
-from utils.csv_helper import (
+from backend.config import UPLOADS_DIR, RESULTS_DIR, BATCHES_DIR, ALLOWED_EXTENSIONS, MAX_FILE_SIZE
+from backend.utils.csv_helper import (
     get_batch_results,
     get_batch_csv_export,
     get_dashboard_stats,
     initialize_results_csv
 )
-from workers.processor import (
+from backend.workers.processor import (
     queue_batch_processing,
     get_batch_status,
     process_batch_worker,
