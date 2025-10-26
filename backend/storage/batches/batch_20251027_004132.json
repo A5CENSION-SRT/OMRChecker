@@ -1,0 +1,28 @@
+{
+  "batchId": "batch_20251027_004132",
+  "status": "completed",
+  "totalFiles": 2,
+  "processed": 2,
+  "processing": 0,
+  "pending": 0,
+  "failed": 0,
+  "queuedAt": "2025-10-27T00:41:32.979967",
+  "startedAt": "2025-10-27T00:41:32.981158",
+  "completedAt": "2025-10-27T00:41:35.888348",
+  "files": [
+    {
+      "fileName": "Screenshot From 2025-10-24 22-06-34.png",
+      "status": "completed",
+      "score": 23.0,
+      "percentage": 23.0,
+      "error": ""
+    },
+    {
+      "fileName": "rgb-100-gsm.jpg",
+      "status": "completed",
+      "score": 74.0,
+      "percentage": 74.0,
+      "error": ""
+    }
+  ]
+}

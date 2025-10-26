@@ -1,0 +1,232 @@
+INFO:     Will watch for changes in these directories: ['/home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [110168] using WatchFiles
+2025-10-27 00:36:12,092 - src.logger - INFO - Loading OMRChecker modules...
+2025-10-27 00:36:12,461 - src.logger - INFO - Loading processors from "src.processors"...
+2025-10-27 00:36:12,464 - src.logger - INFO - Loaded processors: ['CropOnMarkers', 'CropPage', 'FeatureBasedAlignment', 'GaussianBlur', 'Levels', 'MedianBlur']
+2025-10-27 00:36:12,527 - backend.routes.omr - INFO - 🔧 Initializing OMR API routes...
+2025-10-27 00:36:12,527 - backend.utils.csv_helper - INFO - 📊 Results CSV already exists at: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/Results_Master.csv
+2025-10-27 00:36:12,527 - backend.routes.omr - INFO - ✅ OMR API routes initialized
+INFO:     Started server process [110172]
+INFO:     Waiting for application startup.
+2025-10-27 00:36:12,540 - backend.routes.omr - INFO - 🚀 Starting background processing worker...
+2025-10-27 00:36:12,540 - backend.routes.omr - INFO - ✅ Background worker task created
+2025-10-27 00:36:12,540 - backend.routes.omr - INFO - 🚀 Starting background processing worker...
+2025-10-27 00:36:12,540 - backend.routes.omr - INFO - ✅ Background worker task created
+2025-10-27 00:36:12,541 - backend.workers.processor - INFO - 🚀 Background worker started and waiting for batches...
+2025-10-27 00:36:12,541 - backend.workers.processor - INFO - ⏳ Waiting for next batch in queue...
+2025-10-27 00:36:12,541 - backend.workers.processor - INFO - 🚀 Background worker started and waiting for batches...
+2025-10-27 00:36:12,541 - backend.workers.processor - INFO - ⏳ Waiting for next batch in queue...
+INFO:     Application startup complete.
+INFO:     127.0.0.1:44972 - "GET /api/omr/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48366 - "GET /api/omr/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48366 - "GET /api/omr/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48366 - "GET /api/omr/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48366 - "GET /api/omr/dashboard HTTP/1.1" 200 OK
+2025-10-27 00:36:36,340 - backend.routes.omr - INFO - 📤 Upload request received with 1 files
+2025-10-27 00:36:36,340 - backend.routes.omr - INFO -    Validating file: Screenshot From 2025-10-24 22-06-34.png
+2025-10-27 00:36:36,340 - backend.routes.omr - INFO - ✅ All 1 files validated successfully
+2025-10-27 00:36:36,340 - backend.routes.omr - INFO - 🆔 Created batch ID: batch_20251027_003636
+2025-10-27 00:36:36,340 - backend.routes.omr - INFO - 📁 Created batch directory: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/uploads/batch_20251027_003636
+2025-10-27 00:36:36,341 - backend.routes.omr - INFO - 💾 Saving file: Screenshot From 2025-10-24 22-06-34.png
+2025-10-27 00:36:36,342 - backend.routes.omr - INFO - ✅ File saved: Screenshot From 2025-10-24 22-06-34.png (782758 bytes)
+2025-10-27 00:36:36,342 - backend.routes.omr - INFO - 📦 All 1 files saved to: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/uploads/batch_20251027_003636
+2025-10-27 00:36:36,342 - backend.routes.omr - INFO - 📥 Queuing batch batch_20251027_003636 for processing...
+2025-10-27 00:36:36,342 - backend.workers.processor - INFO - 📥 Queuing batch: batch_20251027_003636 with 1 files
+2025-10-27 00:36:36,342 - backend.workers.processor - INFO - ✅ Batch batch_20251027_003636 successfully queued for processing
+2025-10-27 00:36:36,342 - backend.workers.processor - INFO -    Files in batch: ['Screenshot From 2025-10-24 22-06-34.png']
+2025-10-27 00:36:36,342 - backend.routes.omr - INFO - ✅ Batch batch_20251027_003636 queued successfully
+2025-10-27 00:36:36,342 - backend.routes.omr - INFO - 📨 Returning upload response: {'batchId': 'batch_20251027_003636', 'status': 'queued', 'totalFiles': 1, 'queuedAt': '2025-10-27T00:36:36.342528', 'statusUrl': '/api/omr/status/batch_20251027_003636', 'message': 'Batch queued with 1 files'}
+INFO:     127.0.0.1:57074 - "POST /api/omr/upload HTTP/1.1" 200 OK
+2025-10-27 00:36:36,343 - backend.workers.processor - INFO - 📦 Processing batch: batch_20251027_003636 with 1 files
+2025-10-27 00:36:36,343 - backend.workers.processor - INFO - 🔧 Initializing OMR processor for batch batch_20251027_003636
+2025-10-27 00:36:36,344 - src.logger - INFO - Loading config.json: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/template/config.json
+2025-10-27 00:36:36,358 - src.logger - INFO - Loading template.json: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/template/template.json
+2025-10-27 00:36:36,403 - src.logger - INFO - Loading evaluation.json: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/template/evaluation.json
+2025-10-27 00:36:36,436 - backend.workers.processor - INFO - 📁 Created output directory: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/batch_20251027_003636
+2025-10-27 00:36:36,437 - backend.workers.processor - INFO - 📄 [1/1] Processing: Screenshot From 2025-10-24 22-06-34.png
+2025-10-27 00:36:36,437 - backend.workers.processor - INFO - 🔍 Scanning OMR sheet: Screenshot From 2025-10-24 22-06-34.png
+qt.qpa.plugin: Could not find the Qt platform plugin "wayland" in "/home/snehal-reddy/.pyenv/versions/3.11.9/lib/python3.11/site-packages/cv2/qt/plugins"
+2025-10-27 00:36:36,610 - src.logger - INFO - Showing 'edge'
+	 Press Q on image to continue. Press Ctrl + C in terminal to exit
+2025-10-27 00:36:38,336 - src.logger - INFO - Found page corners: 	 [[577, 819], [115, 819], [111, 98], [570, 84]]
+2025-10-27 00:36:38,381 - src.logger - INFO - Thresholding: 	global_thr: 200 	global_std_THR: 200	
+2025-10-27 00:36:38,405 - src.logger - INFO - Saving Image to '/home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/batch_20251027_003636/Screenshot From 2025-10-24 22-06-34.png'
+2025-10-27 00:36:38,454 - backend.workers.processor - INFO - ✅ SUCCESS: Screenshot From 2025-10-24 22-06-34.png - Score: 23.0/100.0 (23.0%)
+2025-10-27 00:36:38,455 - backend.workers.processor - INFO -    📊 Stats: Correct: 0, Incorrect: 0, Unmarked: 23
+2025-10-27 00:36:38,455 - backend.workers.processor - INFO - 💾 Saving result to CSV for: Screenshot From 2025-10-24 22-06-34.png
+2025-10-27 00:36:38,455 - backend.utils.csv_helper - INFO - 📊 Results CSV already exists at: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/Results_Master.csv
+2025-10-27 00:36:38,455 - backend.utils.csv_helper - INFO - 💾 Appending result to CSV: Screenshot From 2025-10-24 22-06-34.png
+2025-10-27 00:36:38,455 - backend.utils.csv_helper - INFO -    📝 CSV Row: Batch=batch_20251027_003636, File=Screenshot From 2025-10-24 22-06-34.png, Score=23.0/100.0, Status=completed
+2025-10-27 00:36:38,458 - backend.utils.csv_helper - INFO - ✅ Result saved to CSV successfully: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/Results_Master.csv
+2025-10-27 00:36:38,458 - backend.workers.processor - INFO - 📈 Progress: 100.0% (1/1 files)
+2025-10-27 00:36:38,458 - backend.workers.processor - INFO - 🎉 BATCH COMPLETE: batch_20251027_003636
+2025-10-27 00:36:38,458 - backend.workers.processor - INFO -    ✅ Successful: 1
+2025-10-27 00:36:38,458 - backend.workers.processor - INFO -    ❌ Failed: 0
+2025-10-27 00:36:38,458 - backend.workers.processor - INFO -    📊 Total: 1
+2025-10-27 00:36:38,459 - backend.workers.processor - INFO - 💾 Batch metadata saved to: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/batches/batch_20251027_003636.json
+2025-10-27 00:36:38,459 - backend.workers.processor - INFO - ✓ Queue task marked as done for batch: batch_20251027_003636
+2025-10-27 00:36:38,459 - backend.workers.processor - INFO - ⏳ Waiting for next batch in queue...
+OpenCV(4.12.0) /io/opencv/modules/highgui/src/window_QT.cpp:179: error: (-27:Null pointer) NULL guiReceiver (please create a window) in function 'cvGetPropVisible_QT'
+
+INFO:     127.0.0.1:57074 - "GET /api/omr/status/batch_20251027_003636 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57074 - "GET /api/omr/status/batch_20251027_003636 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57074 - "GET /api/omr/status/batch_20251027_003636 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57074 - "GET /api/omr/results/batch_20251027_003636 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57074 - "GET /api/omr/results/batch_20251027_003636 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56674 - "GET /api/omr/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56674 - "GET /api/omr/dashboard HTTP/1.1" 200 OK
+2025-10-27 00:36:57,049 - backend.routes.omr - INFO - 📤 Upload request received with 1 files
+2025-10-27 00:36:57,049 - backend.routes.omr - INFO -    Validating file: rgb-100-gsm.jpg
+2025-10-27 00:36:57,049 - backend.routes.omr - INFO - ✅ All 1 files validated successfully
+2025-10-27 00:36:57,049 - backend.routes.omr - INFO - 🆔 Created batch ID: batch_20251027_003657
+2025-10-27 00:36:57,049 - backend.routes.omr - INFO - 📁 Created batch directory: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/uploads/batch_20251027_003657
+2025-10-27 00:36:57,049 - backend.routes.omr - INFO - 💾 Saving file: rgb-100-gsm.jpg
+2025-10-27 00:36:57,050 - backend.routes.omr - INFO - ✅ File saved: rgb-100-gsm.jpg (137681 bytes)
+2025-10-27 00:36:57,050 - backend.routes.omr - INFO - 📦 All 1 files saved to: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/uploads/batch_20251027_003657
+2025-10-27 00:36:57,050 - backend.routes.omr - INFO - 📥 Queuing batch batch_20251027_003657 for processing...
+2025-10-27 00:36:57,050 - backend.workers.processor - INFO - 📥 Queuing batch: batch_20251027_003657 with 1 files
+2025-10-27 00:36:57,050 - backend.workers.processor - INFO - ✅ Batch batch_20251027_003657 successfully queued for processing
+2025-10-27 00:36:57,050 - backend.workers.processor - INFO -    Files in batch: ['rgb-100-gsm.jpg']
+2025-10-27 00:36:57,050 - backend.routes.omr - INFO - ✅ Batch batch_20251027_003657 queued successfully
+2025-10-27 00:36:57,050 - backend.routes.omr - INFO - 📨 Returning upload response: {'batchId': 'batch_20251027_003657', 'status': 'queued', 'totalFiles': 1, 'queuedAt': '2025-10-27T00:36:57.050466', 'statusUrl': '/api/omr/status/batch_20251027_003657', 'message': 'Batch queued with 1 files'}
+INFO:     127.0.0.1:56674 - "POST /api/omr/upload HTTP/1.1" 200 OK
+2025-10-27 00:36:57,051 - backend.workers.processor - INFO - 📦 Processing batch: batch_20251027_003657 with 1 files
+2025-10-27 00:36:57,051 - backend.workers.processor - INFO - 🔧 Initializing OMR processor for batch batch_20251027_003657
+2025-10-27 00:36:57,051 - backend.workers.processor - INFO - 📁 Created output directory: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/batch_20251027_003657
+2025-10-27 00:36:57,051 - backend.workers.processor - INFO - 📄 [1/1] Processing: rgb-100-gsm.jpg
+2025-10-27 00:36:57,051 - backend.workers.processor - INFO - 🔍 Scanning OMR sheet: rgb-100-gsm.jpg
+2025-10-27 00:36:57,093 - src.logger - INFO - Showing 'edge'
+	 Press Q on image to continue. Press Ctrl + C in terminal to exit
+2025-10-27 00:37:08,333 - src.logger - INFO - Found page corners: 	 [[589, 93], [596, 716], [120, 720], [114, 104]]
+2025-10-27 00:37:08,372 - src.logger - INFO - Thresholding: 	global_thr: 170.58 	global_std_THR: 17.58	
+2025-10-27 00:37:08,396 - src.logger - INFO - Saving Image to '/home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/batch_20251027_003657/rgb-100-gsm.jpg'
+2025-10-27 00:37:08,415 - backend.workers.processor - INFO - ✅ SUCCESS: rgb-100-gsm.jpg - Score: 74.0/100.0 (74.0%)
+2025-10-27 00:37:08,415 - backend.workers.processor - INFO -    📊 Stats: Correct: 0, Incorrect: 0, Unmarked: 26
+2025-10-27 00:37:08,415 - backend.workers.processor - INFO - 💾 Saving result to CSV for: rgb-100-gsm.jpg
+2025-10-27 00:37:08,415 - backend.utils.csv_helper - INFO - 📊 Results CSV already exists at: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/Results_Master.csv
+2025-10-27 00:37:08,415 - backend.utils.csv_helper - INFO - 💾 Appending result to CSV: rgb-100-gsm.jpg
+2025-10-27 00:37:08,416 - backend.utils.csv_helper - INFO -    📝 CSV Row: Batch=batch_20251027_003657, File=rgb-100-gsm.jpg, Score=74.0/100.0, Status=completed
+2025-10-27 00:37:08,418 - backend.utils.csv_helper - INFO - ✅ Result saved to CSV successfully: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/Results_Master.csv
+2025-10-27 00:37:08,418 - backend.workers.processor - INFO - 📈 Progress: 100.0% (1/1 files)
+2025-10-27 00:37:08,418 - backend.workers.processor - INFO - 🎉 BATCH COMPLETE: batch_20251027_003657
+2025-10-27 00:37:08,418 - backend.workers.processor - INFO -    ✅ Successful: 1
+2025-10-27 00:37:08,418 - backend.workers.processor - INFO -    ❌ Failed: 0
+2025-10-27 00:37:08,418 - backend.workers.processor - INFO -    📊 Total: 1
+2025-10-27 00:37:08,419 - backend.workers.processor - INFO - 💾 Batch metadata saved to: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/batches/batch_20251027_003657.json
+2025-10-27 00:37:08,419 - backend.workers.processor - INFO - ✓ Queue task marked as done for batch: batch_20251027_003657
+2025-10-27 00:37:08,419 - backend.workers.processor - INFO - ⏳ Waiting for next batch in queue...
+INFO:     127.0.0.1:56674 - "GET /api/omr/status/batch_20251027_003657 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56674 - "GET /api/omr/status/batch_20251027_003657 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56674 - "GET /api/omr/status/batch_20251027_003657 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56674 - "GET /api/omr/status/batch_20251027_003657 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56674 - "GET /api/omr/status/batch_20251027_003657 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56674 - "GET /api/omr/status/batch_20251027_003657 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56674 - "GET /api/omr/status/batch_20251027_003657 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56674 - "GET /api/omr/status/batch_20251027_003657 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56674 - "GET /api/omr/results/batch_20251027_003657 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56674 - "GET /api/omr/results/batch_20251027_003657 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43106 - "GET /api/omr/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43106 - "GET /api/omr/dashboard HTTP/1.1" 200 OK
+2025-10-27 00:37:40,171 - backend.routes.omr - INFO - 📤 Upload request received with 1 files
+2025-10-27 00:37:40,171 - backend.routes.omr - INFO -    Validating file: Screenshot From 2025-10-24 22-06-34.png
+2025-10-27 00:37:40,171 - backend.routes.omr - INFO - ✅ All 1 files validated successfully
+2025-10-27 00:37:40,171 - backend.routes.omr - INFO - 🆔 Created batch ID: batch_20251027_003740
+2025-10-27 00:37:40,172 - backend.routes.omr - INFO - 📁 Created batch directory: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/uploads/batch_20251027_003740
+2025-10-27 00:37:40,172 - backend.routes.omr - INFO - 💾 Saving file: Screenshot From 2025-10-24 22-06-34.png
+2025-10-27 00:37:40,173 - backend.routes.omr - INFO - ✅ File saved: Screenshot From 2025-10-24 22-06-34.png (782758 bytes)
+2025-10-27 00:37:40,173 - backend.routes.omr - INFO - 📦 All 1 files saved to: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/uploads/batch_20251027_003740
+2025-10-27 00:37:40,173 - backend.routes.omr - INFO - 📥 Queuing batch batch_20251027_003740 for processing...
+2025-10-27 00:37:40,173 - backend.workers.processor - INFO - 📥 Queuing batch: batch_20251027_003740 with 1 files
+2025-10-27 00:37:40,173 - backend.workers.processor - INFO - ✅ Batch batch_20251027_003740 successfully queued for processing
+2025-10-27 00:37:40,173 - backend.workers.processor - INFO -    Files in batch: ['Screenshot From 2025-10-24 22-06-34.png']
+2025-10-27 00:37:40,174 - backend.routes.omr - INFO - ✅ Batch batch_20251027_003740 queued successfully
+2025-10-27 00:37:40,174 - backend.routes.omr - INFO - 📨 Returning upload response: {'batchId': 'batch_20251027_003740', 'status': 'queued', 'totalFiles': 1, 'queuedAt': '2025-10-27T00:37:40.173624', 'statusUrl': '/api/omr/status/batch_20251027_003740', 'message': 'Batch queued with 1 files'}
+INFO:     127.0.0.1:43118 - "POST /api/omr/upload HTTP/1.1" 200 OK
+2025-10-27 00:37:40,174 - backend.workers.processor - INFO - 📦 Processing batch: batch_20251027_003740 with 1 files
+2025-10-27 00:37:40,174 - backend.workers.processor - INFO - 🔧 Initializing OMR processor for batch batch_20251027_003740
+2025-10-27 00:37:40,175 - backend.workers.processor - INFO - 📁 Created output directory: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/batch_20251027_003740
+2025-10-27 00:37:40,175 - backend.workers.processor - INFO - 📄 [1/1] Processing: Screenshot From 2025-10-24 22-06-34.png
+2025-10-27 00:37:40,175 - backend.workers.processor - INFO - 🔍 Scanning OMR sheet: Screenshot From 2025-10-24 22-06-34.png
+2025-10-27 00:37:40,240 - src.logger - INFO - Showing 'edge'
+	 Press Q on image to continue. Press Ctrl + C in terminal to exit
+2025-10-27 00:37:48,790 - src.logger - INFO - Found page corners: 	 [[577, 819], [115, 819], [111, 98], [570, 84]]
+2025-10-27 00:37:48,823 - src.logger - INFO - Thresholding: 	global_thr: 200 	global_std_THR: 200	
+2025-10-27 00:37:48,860 - src.logger - INFO - Saving Image to '/home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/batch_20251027_003740/Screenshot From 2025-10-24 22-06-34.png'
+2025-10-27 00:37:48,919 - backend.workers.processor - INFO - ✅ SUCCESS: Screenshot From 2025-10-24 22-06-34.png - Score: 23.0/100.0 (23.0%)
+2025-10-27 00:37:48,920 - backend.workers.processor - INFO -    📊 Stats: Correct: 0, Incorrect: 0, Unmarked: 23
+2025-10-27 00:37:48,920 - backend.workers.processor - INFO - 💾 Saving result to CSV for: Screenshot From 2025-10-24 22-06-34.png
+2025-10-27 00:37:48,920 - backend.utils.csv_helper - INFO - 📊 Results CSV already exists at: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/Results_Master.csv
+2025-10-27 00:37:48,920 - backend.utils.csv_helper - INFO - 💾 Appending result to CSV: Screenshot From 2025-10-24 22-06-34.png
+2025-10-27 00:37:48,920 - backend.utils.csv_helper - INFO -    📝 CSV Row: Batch=batch_20251027_003740, File=Screenshot From 2025-10-24 22-06-34.png, Score=23.0/100.0, Status=completed
+2025-10-27 00:37:48,922 - backend.utils.csv_helper - INFO - ✅ Result saved to CSV successfully: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/Results_Master.csv
+2025-10-27 00:37:48,922 - backend.workers.processor - INFO - 📈 Progress: 100.0% (1/1 files)
+2025-10-27 00:37:48,922 - backend.workers.processor - INFO - 🎉 BATCH COMPLETE: batch_20251027_003740
+2025-10-27 00:37:48,922 - backend.workers.processor - INFO -    ✅ Successful: 1
+2025-10-27 00:37:48,922 - backend.workers.processor - INFO -    ❌ Failed: 0
+2025-10-27 00:37:48,922 - backend.workers.processor - INFO -    📊 Total: 1
+2025-10-27 00:37:48,923 - backend.workers.processor - INFO - 💾 Batch metadata saved to: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/batches/batch_20251027_003740.json
+2025-10-27 00:37:48,923 - backend.workers.processor - INFO - ✓ Queue task marked as done for batch: batch_20251027_003740
+2025-10-27 00:37:48,923 - backend.workers.processor - INFO - ⏳ Waiting for next batch in queue...
+INFO:     127.0.0.1:43118 - "GET /api/omr/status/batch_20251027_003740 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43118 - "GET /api/omr/status/batch_20251027_003740 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43118 - "GET /api/omr/status/batch_20251027_003740 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43118 - "GET /api/omr/status/batch_20251027_003740 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43118 - "GET /api/omr/status/batch_20251027_003740 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43118 - "GET /api/omr/status/batch_20251027_003740 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43118 - "GET /api/omr/status/batch_20251027_003740 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43118 - "GET /api/omr/results/batch_20251027_003740 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43118 - "GET /api/omr/results/batch_20251027_003740 HTTP/1.1" 200 OK
+2025-10-27 00:37:57,440 - backend.routes.omr - INFO - 📤 Upload request received with 1 files
+2025-10-27 00:37:57,440 - backend.routes.omr - INFO -    Validating file: rgb-100-gsm.jpg
+2025-10-27 00:37:57,440 - backend.routes.omr - INFO - ✅ All 1 files validated successfully
+2025-10-27 00:37:57,440 - backend.routes.omr - INFO - 🆔 Created batch ID: batch_20251027_003757
+2025-10-27 00:37:57,441 - backend.routes.omr - INFO - 📁 Created batch directory: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/uploads/batch_20251027_003757
+2025-10-27 00:37:57,441 - backend.routes.omr - INFO - 💾 Saving file: rgb-100-gsm.jpg
+2025-10-27 00:37:57,441 - backend.routes.omr - INFO - ✅ File saved: rgb-100-gsm.jpg (137681 bytes)
+2025-10-27 00:37:57,441 - backend.routes.omr - INFO - 📦 All 1 files saved to: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/uploads/batch_20251027_003757
+2025-10-27 00:37:57,441 - backend.routes.omr - INFO - 📥 Queuing batch batch_20251027_003757 for processing...
+2025-10-27 00:37:57,441 - backend.workers.processor - INFO - 📥 Queuing batch: batch_20251027_003757 with 1 files
+2025-10-27 00:37:57,441 - backend.workers.processor - INFO - ✅ Batch batch_20251027_003757 successfully queued for processing
+2025-10-27 00:37:57,441 - backend.workers.processor - INFO -    Files in batch: ['rgb-100-gsm.jpg']
+2025-10-27 00:37:57,441 - backend.routes.omr - INFO - ✅ Batch batch_20251027_003757 queued successfully
+2025-10-27 00:37:57,441 - backend.routes.omr - INFO - 📨 Returning upload response: {'batchId': 'batch_20251027_003757', 'status': 'queued', 'totalFiles': 1, 'queuedAt': '2025-10-27T00:37:57.441553', 'statusUrl': '/api/omr/status/batch_20251027_003757', 'message': 'Batch queued with 1 files'}
+INFO:     127.0.0.1:37280 - "POST /api/omr/upload HTTP/1.1" 200 OK
+2025-10-27 00:37:57,442 - backend.workers.processor - INFO - 📦 Processing batch: batch_20251027_003757 with 1 files
+2025-10-27 00:37:57,442 - backend.workers.processor - INFO - 🔧 Initializing OMR processor for batch batch_20251027_003757
+2025-10-27 00:37:57,442 - backend.workers.processor - INFO - 📁 Created output directory: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/batch_20251027_003757
+2025-10-27 00:37:57,442 - backend.workers.processor - INFO - 📄 [1/1] Processing: rgb-100-gsm.jpg
+2025-10-27 00:37:57,442 - backend.workers.processor - INFO - 🔍 Scanning OMR sheet: rgb-100-gsm.jpg
+2025-10-27 00:37:57,470 - src.logger - INFO - Showing 'edge'
+	 Press Q on image to continue. Press Ctrl + C in terminal to exit
+2025-10-27 00:38:11,894 - src.logger - INFO - Found page corners: 	 [[589, 93], [596, 716], [120, 720], [114, 104]]
+2025-10-27 00:38:11,938 - src.logger - INFO - Thresholding: 	global_thr: 170.58 	global_std_THR: 17.58	
+2025-10-27 00:38:11,961 - src.logger - INFO - Saving Image to '/home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/batch_20251027_003757/rgb-100-gsm.jpg'
+2025-10-27 00:38:11,975 - backend.workers.processor - INFO - ✅ SUCCESS: rgb-100-gsm.jpg - Score: 74.0/100.0 (74.0%)
+2025-10-27 00:38:11,975 - backend.workers.processor - INFO -    📊 Stats: Correct: 0, Incorrect: 0, Unmarked: 26
+2025-10-27 00:38:11,975 - backend.workers.processor - INFO - 💾 Saving result to CSV for: rgb-100-gsm.jpg
+2025-10-27 00:38:11,975 - backend.utils.csv_helper - INFO - 📊 Results CSV already exists at: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/Results_Master.csv
+2025-10-27 00:38:11,975 - backend.utils.csv_helper - INFO - 💾 Appending result to CSV: rgb-100-gsm.jpg
+2025-10-27 00:38:11,976 - backend.utils.csv_helper - INFO -    📝 CSV Row: Batch=batch_20251027_003757, File=rgb-100-gsm.jpg, Score=74.0/100.0, Status=completed
+2025-10-27 00:38:11,977 - backend.utils.csv_helper - INFO - ✅ Result saved to CSV successfully: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/results/Results_Master.csv
+2025-10-27 00:38:11,978 - backend.workers.processor - INFO - 📈 Progress: 100.0% (1/1 files)
+2025-10-27 00:38:11,978 - backend.workers.processor - INFO - 🎉 BATCH COMPLETE: batch_20251027_003757
+2025-10-27 00:38:11,978 - backend.workers.processor - INFO -    ✅ Successful: 1
+2025-10-27 00:38:11,978 - backend.workers.processor - INFO -    ❌ Failed: 0
+2025-10-27 00:38:11,978 - backend.workers.processor - INFO -    📊 Total: 1
+2025-10-27 00:38:11,978 - backend.workers.processor - INFO - 💾 Batch metadata saved to: /home/snehal-reddy/Coding/Repositories /qr/OMRChecker-1/backend/storage/batches/batch_20251027_003757.json
+2025-10-27 00:38:11,978 - backend.workers.processor - INFO - ✓ Queue task marked as done for batch: batch_20251027_003757
+2025-10-27 00:38:11,978 - backend.workers.processor - INFO - ⏳ Waiting for next batch in queue...
+INFO:     127.0.0.1:37280 - "GET /api/omr/status/batch_20251027_003757 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37280 - "GET /api/omr/status/batch_20251027_003757 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37280 - "GET /api/omr/status/batch_20251027_003757 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37280 - "GET /api/omr/status/batch_20251027_003757 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37280 - "GET /api/omr/status/batch_20251027_003757 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37280 - "GET /api/omr/status/batch_20251027_003757 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37280 - "GET /api/omr/status/batch_20251027_003757 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37280 - "GET /api/omr/status/batch_20251027_003757 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37280 - "GET /api/omr/status/batch_20251027_003757 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37280 - "GET /api/omr/status/batch_20251027_003757 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37280 - "GET /api/omr/results/batch_20251027_003757 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37280 - "GET /api/omr/results/batch_20251027_003757 HTTP/1.1" 200 OK
+INFO:     Stopping reloader process [110168]

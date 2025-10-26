@@ -1,0 +1,21 @@
+{
+  "batchId": "batch_20251027_004149",
+  "status": "completed",
+  "totalFiles": 1,
+  "processed": 1,
+  "processing": 0,
+  "pending": 0,
+  "failed": 0,
+  "queuedAt": "2025-10-27T00:41:49.630949",
+  "startedAt": "2025-10-27T00:41:49.631926",
+  "completedAt": "2025-10-27T00:42:21.875220",
+  "files": [
+    {
+      "fileName": "Screenshot From 2025-10-24 22-06-34.png",
+      "status": "completed",
+      "score": 23.0,
+      "percentage": 23.0,
+      "error": ""
+    }
+  ]
+}

@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { FileCheck, TrendingUp, CheckCircle2, BarChart3, Upload, Loader2, AlertCircle, ArrowRight } from 'lucide-react';
 import { apiClient, DashboardStats } from '@/lib/api';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function Dashboard() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
@@ -23,14 +27,32 @@ export default function Dashboard() {
     };
 
     fetchStats();
+
+    // Poll for updates every 5 seconds
+    const interval = setInterval(fetchStats, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading dashboard...</p>
+      <div className="container mx-auto max-w-7xl px-6 lg:px-8 py-12">
+        <div className="mb-12 space-y-3">
+          <Skeleton className="h-12 w-[350px]" />
+          <Skeleton className="h-6 w-[600px]" />
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-12">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <Card key={i}>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <Skeleton className="h-5 w-[120px]" />
+                <Skeleton className="h-6 w-6 rounded-full" />
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <Skeleton className="h-10 w-[80px]" />
+                <Skeleton className="h-4 w-[140px]" />
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     );
@@ -38,131 +60,224 @@ export default function Dashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-red-600 mb-4">⚠️ {error}</div>
-          <Link
-            href="/upload"
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
-          >
-            Upload New Batch
-          </Link>
+      <div className="container mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="flex min-h-[70vh] items-center justify-center">
+          <div className="mx-auto flex max-w-[500px] flex-col items-center justify-center text-center">
+            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-destructive/10 mb-6">
+              <AlertCircle className="h-10 w-10 text-destructive" />
+            </div>
+            <h1 className="text-3xl font-bold tracking-tight mb-3">
+              Unable to Load Dashboard
+            </h1>
+            <p className="text-base text-muted-foreground mb-8">{error}</p>
+            <Button size="lg" asChild>
+              <Link href="/upload">
+                <Upload className="mr-2 h-5 w-5" />
+                Upload New Batch
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">OMR Batch Grading System</h1>
-          <p className="mt-2 text-gray-600">Upload and process OMR sheets automatically</p>
-        </div>
+    <div className="container mx-auto max-w-7xl px-6 lg:px-8 py-12">
+      {/* Header */}
+      <div className="mb-12">
+        <h1 className="text-5xl font-bold tracking-tight mb-3">Dashboard</h1>
+        <p className="text-lg text-muted-foreground">
+          Monitor your OMR processing system and batch statistics
+        </p>
+      </div>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center">
-              <div className="text-3xl mr-4">📊</div>
-              <div>
-                <div className="text-2xl font-bold text-gray-900">{stats?.totalBatches || 0}</div>
-                <div className="text-sm text-gray-500">Total Batches</div>
-              </div>
+      {/* Stats Cards */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-12">
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-base font-medium">
+              Total Batches
+            </CardTitle>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+              <FileCheck className="h-5 w-5 text-primary" />
             </div>
-          </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-4xl font-bold mb-1">{stats?.totalBatches || 0}</div>
+            <p className="text-sm text-muted-foreground">
+              Processed batches
+            </p>
+          </CardContent>
+        </Card>
 
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center">
-              <div className="text-3xl mr-4">📄</div>
-              <div>
-                <div className="text-2xl font-bold text-gray-900">{stats?.totalScanned || 0}</div>
-                <div className="text-sm text-gray-500">Total Scanned</div>
-              </div>
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-base font-medium">
+              Total Scanned
+            </CardTitle>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10">
+              <BarChart3 className="h-5 w-5 text-blue-600" />
             </div>
-          </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-4xl font-bold mb-1">{stats?.totalScanned || 0}</div>
+            <p className="text-sm text-muted-foreground">
+              OMR sheets processed
+            </p>
+          </CardContent>
+        </Card>
 
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center">
-              <div className="text-3xl mr-4">✅</div>
-              <div>
-                <div className="text-2xl font-bold text-green-600">{stats?.successRate.toFixed(1) || 0}%</div>
-                <div className="text-sm text-gray-500">Success Rate</div>
-              </div>
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-base font-medium">
+              Success Rate
+            </CardTitle>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/10">
+              <CheckCircle2 className="h-5 w-5 text-green-600" />
             </div>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <div className="flex items-center">
-              <div className="text-3xl mr-4">📈</div>
-              <div>
-                <div className="text-2xl font-bold text-blue-600">{stats?.averageScore.toFixed(1) || 0}/100</div>
-                <div className="text-sm text-gray-500">Average Score</div>
-              </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-4xl font-bold text-green-600 mb-1">
+              {stats?.successRate.toFixed(1) || 0}%
             </div>
-          </div>
-        </div>
+            <p className="text-sm text-muted-foreground">
+              Successfully processed
+            </p>
+          </CardContent>
+        </Card>
 
-        {/* Actions */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border mb-8">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/upload"
-              className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 text-center font-medium"
-            >
-              📤 Upload New Batch
-            </Link>
-            <button className="flex-1 bg-gray-100 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-200 font-medium">
-              📋 View All Batches
-            </button>
-          </div>
-        </div>
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-base font-medium">
+              Average Score
+            </CardTitle>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10">
+              <TrendingUp className="h-5 w-5 text-purple-600" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-4xl font-bold text-purple-600 mb-1">
+              {stats?.averageScore.toFixed(1) || 0}
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Out of 100 marks
+            </p>
+          </CardContent>
+        </Card>
+      </div>
 
-        {/* Recent Batches */}
-        <div className="bg-white rounded-lg shadow-sm border">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Recent Batches</h2>
-          </div>
-          <div className="divide-y divide-gray-200">
+      {/* Actions Section */}
+      <div className="grid gap-6 md:grid-cols-2 mb-12">
+        <Card className="border-2 border-dashed hover:border-primary transition-colors">
+          <CardHeader>
+            <CardTitle className="text-xl">Upload New Batch</CardTitle>
+            <CardDescription className="text-base">
+              Process OMR sheets by uploading multiple images
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button className="w-full" size="lg" asChild>
+              <Link href="/upload">
+                <Upload className="mr-2 h-5 w-5" />
+                Upload Batch
+              </Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="border-2">
+          <CardHeader>
+            <CardTitle className="text-xl">Processing Statistics</CardTitle>
+            <CardDescription className="text-base">
+              Current system metrics
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex items-center justify-between text-base">
+              <span className="text-muted-foreground">Failed Sheets</span>
+              <span className="font-semibold font-mono">{stats?.totalFailed || 0}</span>
+            </div>
+            <div className="flex items-center justify-between text-base">
+              <span className="text-muted-foreground">Success Rate</span>
+              <span className="font-semibold text-green-600 font-mono">{stats?.successRate.toFixed(1) || 0}%</span>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Recent Batches */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-2xl">Recent Batches</CardTitle>
+          <CardDescription className="text-base">
+            Recently processed OMR batches
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
             {stats?.recentBatches && stats.recentBatches.length > 0 ? (
               stats.recentBatches.map((batch) => (
-                <div key={batch.batchId} className="px-6 py-4 flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className={`w-3 h-3 rounded-full ${batch.status === 'completed' ? 'bg-green-500' :
-                        batch.status === 'processing' ? 'bg-blue-500' : 'bg-gray-500'
-                      }`} />
+                <div
+                  key={batch.batchId}
+                  className="flex items-center justify-between p-5 border rounded-lg hover:bg-accent/50 transition-all hover:shadow-md"
+                >
+                  <div className="flex items-center gap-5">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                      <FileCheck className="h-6 w-6 text-primary" />
+                    </div>
                     <div>
-                      <div className="font-medium text-gray-900">{batch.batchId}</div>
-                      <div className="text-sm text-gray-500">
-                        {batch.fileCount} files • {new Date(batch.createdAt).toLocaleDateString()}
+                      <div className="font-semibold text-base font-mono mb-1">{batch.batchId}</div>
+                      <div className="text-sm text-muted-foreground">
+                        {batch.fileCount} files • {new Date(batch.createdAt).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })}
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <span className={`px-2 py-1 text-xs rounded-full ${batch.status === 'completed' ? 'bg-green-100 text-green-800' :
-                        batch.status === 'processing' ? 'bg-blue-100 text-blue-800' :
-                          'bg-gray-100 text-gray-800'
+                  <div className="flex items-center gap-4">
+                    <div className={`inline-flex items-center rounded-full px-3 py-1.5 text-sm font-semibold ${batch.status === 'completed'
+                        ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                        : batch.status === 'processing'
+                          ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
+                          : 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400'
                       }`}>
+                      {batch.status === 'processing' && (
+                        <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
+                      )}
                       {batch.status}
-                    </span>
-                    <Link
-                      href={`/results/${batch.batchId}`}
-                      className="text-blue-600 hover:text-blue-800 text-sm"
-                    >
-                      View →
-                    </Link>
+                    </div>
+                    <Button variant="ghost" size="default" asChild>
+                      <Link href={`/results/${batch.batchId}`}>
+                        View Results
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               ))
             ) : (
-              <div className="px-6 py-8 text-center text-gray-500">
-                No batches processed yet. <Link href="/upload" className="text-blue-600 hover:text-blue-800">Upload your first batch</Link>
+              <div className="flex flex-col items-center justify-center py-16 text-center">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted mb-6">
+                  <FileCheck className="h-10 w-10 text-muted-foreground" />
+                </div>
+                <h3 className="font-semibold text-2xl mb-2">No batches yet</h3>
+                <p className="text-base text-muted-foreground mb-6 max-w-md">
+                  Get started by uploading your first OMR batch for automatic processing and grading
+                </p>
+                <Button size="lg" asChild>
+                  <Link href="/upload">
+                    <Upload className="mr-2 h-5 w-5" />
+                    Upload Now
+                  </Link>
+                </Button>
               </div>
             )}
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
