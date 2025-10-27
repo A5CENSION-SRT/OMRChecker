@@ -1,0 +1,21 @@
+{
+  "batchId": "batch_20251027_065105",
+  "status": "completed",
+  "totalFiles": 1,
+  "processed": 1,
+  "processing": 0,
+  "pending": 0,
+  "failed": 0,
+  "queuedAt": "2025-10-27T06:51:05.717720",
+  "startedAt": "2025-10-27T06:51:05.718726",
+  "completedAt": "2025-10-27T06:51:20.731494",
+  "files": [
+    {
+      "fileName": "rgb-100-gsm.jpg",
+      "status": "completed",
+      "score": 74.0,
+      "percentage": 74.0,
+      "error": ""
+    }
+  ]
+}

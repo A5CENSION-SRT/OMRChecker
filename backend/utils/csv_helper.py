@@ -175,21 +175,31 @@ def get_batch_csv_export(batch_id: str) -> Optional[Path]:
     Returns:
         Path to exported CSV file
     """
+    logger.info(f"📊 Exporting CSV for batch: {batch_id}")
+    
     if not RESULTS_CSV_PATH.exists():
+        logger.error(f"❌ Master CSV not found at: {RESULTS_CSV_PATH}")
         return None
     
+    logger.info(f"📄 Reading master CSV: {RESULTS_CSV_PATH}")
     # Read CSV
     df = pd.read_csv(RESULTS_CSV_PATH)
+    logger.info(f"   Total rows in master CSV: {len(df)}")
     
     # Filter by batch ID
     batch_df = df[df["batchId"] == batch_id]
+    logger.info(f"   Rows for batch {batch_id}: {len(batch_df)}")
     
     if batch_df.empty:
+        logger.warning(f"⚠️ No results found for batch: {batch_id}")
         return None
     
     # Export to new file
     export_path = RESULTS_DIR / f"Results_{batch_id}.csv"
+    logger.info(f"💾 Exporting to: {export_path}")
     batch_df.to_csv(export_path, index=False)
+    logger.info(f"✅ CSV export complete: {export_path}")
+    logger.info(f"   File size: {export_path.stat().st_size} bytes")
     
     return export_path
 

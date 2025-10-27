@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ScanLine, Upload, Home, BarChart3 } from "lucide-react";
+import Image from "next/image";
+import { Upload, Home } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -11,8 +12,8 @@ import {
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "OMR Grading System | Automated Optical Mark Recognition",
-  description: "Professional OMR sheet grading and batch processing system with automatic evaluation",
+  title: "RVCE OMR Grading System | Automated Assessment Platform",
+  description: "RV College of Engineering - Professional OMR sheet grading and batch processing system with automated evaluation",
 };
 
 export default function RootLayout({
@@ -29,12 +30,14 @@ export default function RootLayout({
             <div className="flex h-16 items-center justify-between px-6 lg:px-8">
               {/* Logo */}
               <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <ScanLine className="h-6 w-6" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xl font-bold leading-none tracking-tight">OMR System</span>
-                  <span className="text-xs text-muted-foreground font-mono">Automated Grading</span>
+                <div className="relative h-12 w-48">
+                  <Image 
+                    src="/RVCE_Logo_White_Text-1-line.png" 
+                    alt="RVCE Logo" 
+                    fill
+                    className="object-contain"
+                    priority
+                  />
                 </div>
               </Link>
 
@@ -69,14 +72,14 @@ export default function RootLayout({
         </main>
 
         {/* Footer */}
-        <footer className="border-t mt-auto">
+        <footer className="border-t mt-auto bg-muted/30">
           <div className="container mx-auto max-w-7xl">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 px-6 lg:px-8 py-6">
-              <p className="text-sm text-muted-foreground font-mono">
-                © 2025 OMR Grading System • Built with OMRChecker
+              <p className="text-sm text-muted-foreground">
+                © 2025 RV College of Engineering • Automated OMR Grading System
               </p>
               <p className="text-sm text-muted-foreground">
-                Powered by FastAPI & Next.js
+                Department of Academic Assessment
               </p>
             </div>
           </div>

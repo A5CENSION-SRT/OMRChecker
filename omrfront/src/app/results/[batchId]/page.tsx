@@ -36,8 +36,11 @@ export default function ResultsPage() {
         if (!batchId) return;
 
         setDownloading(true);
+        setError(null); // Clear any previous errors
         try {
+            console.log(`Downloading CSV for batch: ${batchId}`);
             const blob = await apiClient.downloadResults(batchId);
+            console.log(`Downloaded blob size: ${blob.size} bytes, type: ${blob.type}`);
 
             // Create download link
             const url = window.URL.createObjectURL(blob);
@@ -48,8 +51,11 @@ export default function ResultsPage() {
             a.click();
             window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
+            console.log('CSV download triggered successfully');
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'Failed to download CSV');
+            console.error('Download failed:', err);
+            const errorMessage = err instanceof Error ? err.message : 'Failed to download CSV';
+            setError(errorMessage);
         } finally {
             setDownloading(false);
         }

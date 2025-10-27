@@ -256,11 +256,18 @@ async def download_results(batch_id: str):
     Returns:
         CSV file download
     """
+    logger.info(f"📥 Download request received for batch: {batch_id}")
+    
     # Export batch to CSV
     csv_path = get_batch_csv_export(batch_id)
     
     if not csv_path or not csv_path.exists():
+        logger.error(f"❌ CSV file not found for batch: {batch_id}")
+        logger.error(f"   Expected path: {csv_path}")
         raise HTTPException(status_code=404, detail="Results not found")
+    
+    logger.info(f"✅ CSV file found: {csv_path}")
+    logger.info(f"   File size: {csv_path.stat().st_size} bytes")
     
     return FileResponse(
         path=str(csv_path),

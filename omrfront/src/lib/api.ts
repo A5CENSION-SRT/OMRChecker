@@ -120,13 +120,26 @@ export class ApiClient {
 
     // Download CSV results
     async downloadResults(batchId: string): Promise<Blob> {
-        const response = await fetch(`${this.baseUrl}/omr/download/${batchId}`);
+        const response = await fetch(`${this.baseUrl}/omr/download/${batchId}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'text/csv',
+            },
+        });
 
         if (!response.ok) {
-            throw new Error(`Failed to download results: ${response.statusText}`);
+            const errorText = await response.text();
+            throw new Error(`Failed to download results: ${response.statusText} - ${errorText}`);
         }
 
-        return response.blob();
+        const blob = await response.blob();
+        
+        // Verify we got a valid blob
+        if (blob.size === 0) {
+            throw new Error('Downloaded file is empty');
+        }
+
+        return blob;
     }
 
     // Get dashboard statistics
