@@ -79,7 +79,7 @@ export default function RootLayout({
                 © 2025 RV College of Engineering • Automated OMR Grading System
               </p>
               <p className="text-sm text-muted-foreground">
-                Department of Academic Assessment
+                Center of Examination
               </p>
             </div>
           </div>
