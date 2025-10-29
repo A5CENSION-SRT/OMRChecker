@@ -1,0 +1,18 @@
+{
+  "name": "stresstest",
+  "version": "1.0.0",
+  "description": "- [ ] Import and configure omr autofill - [ ] Script to generate omr files (structured or random data, lets see) - [ ] Post: script to check input data and output data - [ ] web ui for all this?",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "generate": "node dist/generate_omr.js"
+  },
+  "dependencies": {
+    "@types/node": "^24.9.2",
+    "pdf-lib": "^1.17.1"
+  }
+}
