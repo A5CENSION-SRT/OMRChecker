@@ -18,7 +18,18 @@ export type TextField = {
   fontSize?: number;
 };
 
-export type FieldConfig = BubbleGridField | TextField;
+
+export type AnswesrGrid = {
+  type: 'answers-grid';
+  x: number;
+  y: number;
+  radius: number;
+  groups: [{
+    startQuestion: number, endQuestion: number, x: Record<"A" | "B" | "C" | "D" | "E", number>;
+    y: number, yStart: number, spacing: number
+  }]
+};
+export type FieldConfig = BubbleGridField | TextField | AnswesrGrid;
 
 export type Config = {
   [fieldName: string]: FieldConfig;

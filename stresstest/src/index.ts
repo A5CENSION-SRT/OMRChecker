@@ -1,11 +1,13 @@
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
 import { PDFDocument, PDFFont, PDFPage, rgb, StandardFonts } from 'pdf-lib';
 import { Config } from './types';
+import { pdf } from "pdf-to-img";
 
 // Keys of the type must match the top level fields specified in `Config`. 
 type StudentData = {
     uid: string;
     name: string;
+    answers: Record<number, string>;
 };
 
 export async function fillOMRSingle(
@@ -60,9 +62,24 @@ export async function fillOMRSingle(
         if (field.type === 'text') {
             drawText(value, field.x, field.y, field.fontSize ?? 14);
         }
+
+        if (field.type === "answers-grid" && student.answers) {
+            for (const group of field.groups) {
+                for (let q = group.startQuestion; q <= group.endQuestion; q++) {
+                    const answer = student.answers[q] as "A" | "B" | "C" | "D" | "E" | undefined;
+                    if (!answer) continue;
+
+                    const x = group.x[answer];
+                    const y = group.yStart - (q - group.startQuestion) * group.spacing;
+
+                    if (x && y) {
+                        drawBubble(x, y, field.radius ?? 5);
+                    }
+                }
+            }
+        }
     }
 }
-
 export async function generateOMR(
     templateBytes: Uint8Array,
     students: StudentData[],
@@ -82,7 +99,6 @@ export async function generateOMR(
 
         await fillOMRSingle(templatePage, student, config, font);
     }
-
     return await mergedPdf.save();
 }
 
@@ -116,23 +132,79 @@ function validateConfig(config: Config): string[] {
     return errors;
 }
 
+function generateDummyStudents(count: number): StudentData[] {
+    const students: (StudentData & { answers: Record<number, string> })[] = [];
+    const options = ["A", "B", "C", "D", "E"];
+    for (let i = 0; i < count; i++) {
+        const uid = Math.floor(Math.random() * 1e8)
+            .toString()
+            .padStart(8, "0");
+        const name = `Student_${i + 1}`;
+
+        const answers: Record<number, string> = {};
+        for (let q = 1; q <= 25; q++) {
+            answers[q] = options[Math.floor(Math.random() * options.length)];
+        }
+
+        students.push({ uid, name, answers });
+    }
+    return students;
+}
+
+async function convertAndWriteInParallel(pdfBuffer) {
+    const document = await pdf(pdfBuffer, { scale: 1 }); 
+    
+    // Create an array of Promises for all the file writes
+    const writePromises = [];
+    let counter = 1;
+
+    console.log('Starting parallel file writes...');
+    for await (const image of document) {
+        writePromises.push(
+            fs.writeFile(`output/page${counter}.png`, image)
+        );
+        counter++;
+    }
+
+    await Promise.all(writePromises); 
+    console.log('All pages written successfully.');
+}
+
 async function main() {
-    const templateBytes = await fs.promises.readFile('omr_template.pdf');
-    const config = await fs.promises.readFile('coordinates.json', 'utf8')
+    const templateBytes = await fs.readFile('omr_template.pdf');
+    const config = await fs.readFile('coordinates.json', 'utf8')
     const config_json = JSON.parse(config);
-    const data = {
-        "uid": "01234567",
-        "name": "Student 1"
-    }
-    const data2 = {
-        "uid": "23456789",
-        "name": "Student 2"
-    }
-    const students: StudentData[] = [data, data2];
-    const filled = await generateOMR(templateBytes, students, config_json);
-    await fs.promises.writeFile('filled_output.pdf', filled).then(() => {
-        console.log('OMR written at: filled_output.pdf');
-    });
+
+
+
+    // dummy data for manual testing
+    // const dummystudents: StudentData[] = [
+    //     {
+    //         name: 'Krishna',
+    //         uid: '12345678',
+    //         answers: {
+    //             1: 'A',
+    //             2: 'B',
+    //             3: 'C',
+    //             4: 'D',
+    //         }
+    //     },
+    //     {
+    //         name: 'Yashas',
+    //         uid: '56781234',
+    //         answers: {
+    //             1: 'D',
+    //             2: 'A',
+    //             3: 'C'
+    //         }
+    //     }
+    // ];
+
+    // const students: StudentData[] = [dummystudents];
+    const dummstudents = generateDummyStudents(100)
+    const filled = await generateOMR(templateBytes, dummstudents, config_json);
+
+    convertAndWriteInParallel(filled)
 }
 
 main()
