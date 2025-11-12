@@ -77,6 +77,16 @@ async def process_batch_worker():
                         save_marked_image=True,
                         output_dir=batch_output_dir
                     )
+
+                    # also save the json of filled answers
+                    try:
+                        result_json_path = batch_output_dir / f"{Path(image_path).stem}.json"
+                        with open(result_json_path, "w") as f:
+                            json.dump(result, f, indent=2)
+                        logger.info(f"Saved answers json to {result_json_path}")
+                    except Exception as e:
+                        logger.error(f"Failed to save JSON for {Path(image_path).name}: {e}")
+
                     
                     # Store in file-level status
                     file_status = batch_status[batch_id]["files"][idx]
@@ -145,6 +155,7 @@ async def process_batch_worker():
 def save_batch_metadata(batch_id: str):
     """Save batch metadata to JSON file"""
     metadata_path = BATCHES_DIR / f"{batch_id}.json"
+    BATCHES_DIR.mkdir(parents=True, exist_ok=True)
     
     with open(metadata_path, 'w') as f:
         json.dump(batch_status[batch_id], f, indent=2)

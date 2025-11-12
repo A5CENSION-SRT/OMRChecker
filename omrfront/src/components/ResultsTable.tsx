@@ -84,7 +84,7 @@ export function ResultsTable({ results, batchId, onDownloadCsv }: ResultsTablePr
                                         {result.rollNumber || '-'}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        {result.score}/100
+                                        {result.score}/{(result.score * 100) / result.percentage}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         {result.percentage}%

@@ -1,0 +1,6 @@
+./storage/batches/*
+./storage/uploads/*
+./storage/results
+storage/results
+storage/uploads
+storage/batches

@@ -1,143 +1,102 @@
 {
   "pageDimensions": [
-    1800,
-    2400
+    595,
+    841
   ],
   "bubbleDimensions": [
-    23,
-    20
+    10,
+    10
   ],
+  "customLabels": {
+    "rollNumber": [
+      "1",
+      "R",
+      "V",
+      "roll4..10"
+    ]
+  },
   "fieldBlocks": {
-    "q01block": {
+    "MCQBlock1": {
+      "fieldType": "QTYPE_MCQ4",
       "origin": [
-        504,
-        927
+        123,
+        495
       ],
-      "bubblesGap": 60.35,
-      "labelsGap": 31.75,
       "fieldLabels": [
         "q1..10"
       ],
-      "fieldType": "QTYPE_MCQ4"
+      "bubblesGap": 20,
+      "labelsGap": 25
     },
-    "q11block": {
+    "MCQBlock2": {
+      "fieldType": "QTYPE_MCQ4",
       "origin": [
-        504,
-        1242
+        392,
+        495
       ],
-      "bubblesGap": 60.35,
-      "labelsGap": 31.75,
       "fieldLabels": [
         "q11..20"
       ],
-      "fieldType": "QTYPE_MCQ4"
+      "bubblesGap": 20.5,
+      "labelsGap": 25
     },
-    "q21block": {
+    "1": {
       "origin": [
-        500,
-        1562
+        115,
+        195
       ],
-      "bubblesGap": 61.25,
-      "labelsGap": 32.5,
+      "direction": "vertical",
+      "bubblesGap": 0,
+      "bubbleValues": [
+        "1"
+      ],
       "fieldLabels": [
-        "q21..30"
+        "1"
       ],
-      "fieldType": "QTYPE_MCQ4"
+      "labelsGap": 0
     },
-    "q31block": {
+    "R": {
       "origin": [
-        500,
-        1885
+        145,
+        195
       ],
-      "bubblesGap": 62.25,
-      "labelsGap": 33.5,
+      "direction": "vertical",
+      "bubblesGap": 0,
+      "bubbleValues": [
+        "R"
+      ],
       "fieldLabels": [
-        "q31..40"
+        "R"
       ],
-      "fieldType": "QTYPE_MCQ4"
+      "labelsGap": 0
     },
-    "q41block": {
+    "V": {
       "origin": [
-        811,
-        927
+        173,
+        195
       ],
-      "bubblesGap": 60.35,
-      "labelsGap": 31.75,
+      "direction": "vertical",
+      "bubblesGap": 0,
+      "bubbleValues": [
+        "V"
+      ],
       "fieldLabels": [
-        "q41..50"
+        "V"
       ],
-      "fieldType": "QTYPE_MCQ4"
+      "labelsGap": 0
     },
-    "q51block": {
+    "rollNumber": {
+      "fieldType": "QTYPE_INT",
       "origin": [
-        811,
-        1242
+        202,
+        194
       ],
-      "bubblesGap": 60.35,
-      "labelsGap": 31.75,
+      "bubblesGap": 22,
+      "labelsGap": 28,
       "fieldLabels": [
-        "q51..60"
-      ],
-      "fieldType": "QTYPE_MCQ4"
-    },
-    "q61block": {
-      "origin": [
-        811,
-        1562
-      ],
-      "bubblesGap": 61.25,
-      "labelsGap": 32.5,
-      "fieldLabels": [
-        "q61..70"
-      ],
-      "fieldType": "QTYPE_MCQ4"
-    },
-    "q71block": {
-      "origin": [
-        811,
-        1885
-      ],
-      "bubblesGap": 62.25,
-      "labelsGap": 33.5,
-      "fieldLabels": [
-        "q71..80"
-      ],
-      "fieldType": "QTYPE_MCQ4"
-    },
-    "q81block": {
-      "origin": [
-        1120,
-        927
-      ],
-      "bubblesGap": 60.35,
-      "labelsGap": 31.75,
-      "fieldLabels": [
-        "q81..90"
-      ],
-      "fieldType": "QTYPE_MCQ4"
-    },
-    "q91block": {
-      "origin": [
-        1120,
-        1242
-      ],
-      "bubblesGap": 60.35,
-      "labelsGap": 31.75,
-      "fieldLabels": [
-        "q91..100"
-      ],
-      "fieldType": "QTYPE_MCQ4"
+        "roll4..10"
+      ]
     }
   },
-  "preProcessors": [
-    {
-      "name": "CropPage",
-      "options": {
-        "morphKernel": [
-          10,
-          10
-        ]
-      }
-    }
-  ]
+  "preProcessors": []
 }

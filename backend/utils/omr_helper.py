@@ -71,7 +71,7 @@ class OMRProcessor:
             self.template.image_instance_ops.reset_all_save_img()
             self.template.image_instance_ops.append_save_img(1, in_omr)
             
-            # Apply preprocessors
+
             processed_omr = self.template.image_instance_ops.apply_preprocessors(
                 str(image_path), in_omr, self.template
             )
@@ -101,6 +101,8 @@ class OMRProcessor:
             
             # Get concatenated responses
             omr_response = get_concatenated_response(response_dict, self.template)
+
+            print("YO ROLL NUMBER SPOFJPSODJFPSDJFPOSJD PFSPDOFJPSO  ", omr_response)
             
             # Evaluate if answer key exists
             score = 0
@@ -139,7 +141,7 @@ class OMRProcessor:
             return {
                 "status": "completed",
                 "fileName": image_path.name,
-                "rollNumber": omr_response.get("Roll", ""),
+                "rollNumber": omr_response.get("rollNumber", ""),
                 "responses": omr_response,
                 "evaluatedResponses": evaluated_responses,
                 "totalQuestions": total_questions,
