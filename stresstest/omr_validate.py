@@ -3,7 +3,7 @@ import os
 from glob import glob
 
 GENERATED_FILE = "generated_omrs/omr_data.json" # file with all answers
-READ_RESULTS_DIR = "../backend/storage/results/batch_20251112_101156" # point this to the resultant folder of the completed batch
+READ_RESULTS_DIR = "../backend/storage/results/batch_20251218_140803" # point this to the resultant folder of the completed batch
 
 def normalize_q_key(q):
     q = q.strip().lower().replace("q", "")

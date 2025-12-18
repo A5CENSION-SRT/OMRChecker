@@ -8,9 +8,6 @@
     10
   ],
   "customLabels": {
-    "subjectcode": [
-      "subject1..3"
-    ],
     "rollNumber": [
     "roll1..10"
     ]
@@ -19,82 +16,64 @@
     "MCQBlock1": {
       "fieldType": "QTYPE_MCQ4",
       "origin": [
-        104,
-        350
+        123,
+        495
       ],
       "fieldLabels": [
         "q1..15"
       ],
-      "bubblesGap": 15.1,
-      "labelsGap": 28.8
+      "bubblesGap": 20,
+      "labelsGap": 25
     },
-
-
     "MCQBlock2": {
       "fieldType": "QTYPE_MCQ4",
       "origin": [
-        220,
-        350
+        392,
+        495
       ],
       "fieldLabels": [
         "q16..30"
       ],
-      "bubblesGap": 15.1,
-      "labelsGap": 28.8
+      "bubblesGap": 20.5,
+      "labelsGap": 25
     },
-
 
     "MCQBlock3": {
       "fieldType": "QTYPE_MCQ4",
       "origin": [
-        336,
-        350
+        392,
+        495
       ],
       "fieldLabels": [
-        "q31..45"
+        "31..45"
       ],
-      "bubblesGap": 15.1,
-      "labelsGap": 28.8
+      "bubblesGap": 20.5,
+      "labelsGap": 25
     },
-
 
     "MCQBlock4": {
       "fieldType": "QTYPE_MCQ4",
       "origin": [
-        450,
-        350
+        392,
+        495
       ],
       "fieldLabels": [
         "q46..60"
       ],
-      "bubblesGap": 15.1,
-      "labelsGap": 28.8
+      "bubblesGap": 20.5,
+      "labelsGap": 25
     },
-    
+
     "rollNumber": {
       "fieldType": "QTYPE_INT",
       "origin": [
-        46,
-        162
+        135,
+        194
       ],
-      "bubblesGap": 14.7,
-      "labelsGap": 14.5,
+      "bubblesGap": 22,
+      "labelsGap": 28,
       "fieldLabels": [
         "roll1..10"
-      ]
-    },
-
-
-    "subjectcode": {
-      "fieldType": "QTYPE_INT",
-      "origin": [
-        220,
-        162
-      ],
-      "bubblesGap": 14.7,
-      "labelsGap": 14.5,
-      "fieldLabels": [
-        "subject1..3"
       ]
     }
   },

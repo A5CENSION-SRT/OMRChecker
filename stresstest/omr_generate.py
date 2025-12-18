@@ -130,4 +130,4 @@ def generate_dummy_omr_images(output_dir="generated_omrs", sheet_count=5, logo_p
     print(f"aved JSON data to {json_path}")
 
 if __name__ == "__main__":
-    generate_dummy_omr_images(sheet_count=5, logo_path="rvce_logo.png")
+    generate_dummy_omr_images(sheet_count=10, logo_path="rvce_logo.png")
