@@ -3,17 +3,17 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
-interface UploadZoneProps {
+interface UploadAnswersZoneProps {
   onFilesSelected: (files: File[]) => void;
   disabled?: boolean;
   maxFiles?: number;
 }
 
-export function UploadZone({
+export function UploadAnswersZone({
   onFilesSelected,
   disabled = false,
   maxFiles = 100,
-}: UploadZoneProps) {
+}: UploadAnswersZoneProps) {
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       if (acceptedFiles.length > 0) {
@@ -55,15 +55,15 @@ export function UploadZone({
     >
       <input {...getInputProps()} />
       <div className="space-y-4">
-        <div className="text-6xl">📄</div>
+        <div className="text-6xl">📝</div>
         <div>
           <p className="text-lg font-medium text-gray-900">
             {dropzoneDragActive
               ? "Drop the files here..."
-              : "Drag & drop OMR sheets here"}
+              : "Drag & drop Excel Answer sheet here"}
           </p>
           <p className="text-sm text-gray-500 mt-2">
-            or click to select files (JPG, PNG, BMP, TIFF)
+            or click to select files (XLSX, XLS)
           </p>
           <p className="text-xs text-gray-400 mt-1">
             Maximum {maxFiles} files • Up to 10MB each

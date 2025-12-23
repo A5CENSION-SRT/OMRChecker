@@ -1,16 +1,17 @@
 """
 FastAPI Main Application for OMR Grading System MVP
 """
-import sys
+
 import logging
+import sys
 from pathlib import Path
 
 # Configure logging FIRST before any other imports
 # This ensures OMRChecker library uses our logging configuration
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    force=True  # Override any existing configuration
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    force=True,  # Override any existing configuration
 )
 
 # Add project root to Python path for OMRChecker imports
@@ -20,7 +21,8 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from backend.config import settings, RESULTS_DIR
+
+from backend.config import RESULTS_DIR, settings
 from backend.routes.omr import router as omr_router
 
 # Create FastAPI app
@@ -28,7 +30,7 @@ app = FastAPI(
     title=settings.app_name,
     description="Mass OMR sheet grading with single template",
     version="1.0.0",
-    debug=settings.debug
+    debug=settings.debug,
 )
 
 # CORS middleware for Next.js frontend
@@ -58,8 +60,8 @@ async def root():
             "status": "GET /api/omr/status/{batchId}",
             "results": "GET /api/omr/results/{batchId}",
             "download": "GET /api/omr/download/{batchId}",
-            "dashboard": "GET /api/omr/dashboard"
-        }
+            "dashboard": "GET /api/omr/dashboard",
+        },
     }
 
 
@@ -71,10 +73,7 @@ async def health_check():
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(
-        "backend.main:app",
-        host="0.0.0.0",
-        port=8000,
-        reload=True,
-        log_level="info"
+        "backend.main:app", host="0.0.0.0", port=8000, reload=True, log_level="info"
     )
