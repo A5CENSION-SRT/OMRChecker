@@ -4,11 +4,14 @@ Handles batch upload, processing status, and results retrieval
 """
 
 import asyncio
+import io
+import json
 import logging
 from datetime import datetime
 from pathlib import Path
 from typing import List
 
+import pandas as pd
 from fastapi import APIRouter, BackgroundTasks, File, HTTPException, UploadFile
 from fastapi.responses import FileResponse
 
@@ -152,6 +155,55 @@ async def upload_batch(
         "message": f"Batch queued with {len(saved_files)} files",
     }
 
+    logger.info(f"📨 Returning upload response: {response}")
+    return response
+
+
+@router.post("/uploadexcel")
+async def upload_excel(
+    files: List[UploadFile] = File(...), background_tasks: BackgroundTasks = None
+):
+    logger.info(f"📤 Upload request from upload excel received with {len(files)} files")
+    print("Called from upload excel")
+
+    if not files:
+        logger.warning("⚠️  No files provided in upload request")
+        raise HTTPException(status_code=400, detail="No files provided")
+
+    excel_file = files[0]
+    contents = await excel_file.read()
+
+    print("EXCEL FILE - ", excel_file)
+
+    df = pd.read_excel(io.BytesIO(contents), header=None)
+
+    answers = df.iloc[:, 0].astype(str).tolist()
+
+    # Generate questions q1, q2, ..., qN
+    questions = [f"q{i + 1}" for i in range(len(answers))]
+
+    # Build JSON structure
+    output = {
+        "source_type": "custom",
+        "options": {
+            "questions_in_order": questions,
+            "answers_in_order": answers,
+            "should_explain_scoring": True,
+        },
+        "marking_schemes": {
+            "DEFAULT": {"correct": "1", "incorrect": "0", "unmarked": "0"}
+        },
+    }
+
+    # Save JSON to file
+    EVALUATION_FILE_PATH = "./storage/template/evaluation.json"
+    with open(EVALUATION_FILE_PATH, "w", encoding="utf-8") as f:
+        json.dump(output, f, indent=2)
+        logger.info(f"✅ Written successfully")
+
+    print("JSON generated successfully: output.json")
+
+    response = {"status": "done"}
     logger.info(f"📨 Returning upload response: {response}")
     return response
 

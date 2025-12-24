@@ -88,12 +88,47 @@ export class ApiClient {
       formData.append("batchName", batchName);
     }
 
+    console.log("formdata working upload is - ", formData);
+
     const response = await fetch(`${this.baseUrl}/omr/upload`, {
       method: "POST",
       body: formData,
     });
 
+    console.log("respinse from here = ", response);
+
     if (!response.ok) {
+      throw new Error(`Upload failed: ${response.statusText}`);
+    }
+
+    return response.json();
+  }
+
+  async uploadexcel(
+    files: File[],
+    batchName?: string,
+  ): Promise<UploadResponse> {
+    const formData = new FormData();
+
+    files.forEach((file) => {
+      formData.append("files", file);
+    });
+
+    if (batchName) {
+      formData.append("batchName", batchName);
+    }
+
+    console.log("formdata is - ", formData);
+
+    const response = await fetch(`${this.baseUrl}/omr/uploadexcel`, {
+      method: "POST",
+      body: formData,
+    });
+
+    console.log("respinse from here = ", response);
+
+    if (!response.ok) {
+      console.log("failllleld[kfs[psokdfp osdjmfpoij oi");
       throw new Error(`Upload failed: ${response.statusText}`);
     }
 

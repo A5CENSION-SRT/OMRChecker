@@ -1,12 +1,29 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { FileCheck, TrendingUp, CheckCircle2, BarChart3, Upload, Loader2, AlertCircle, ArrowRight } from 'lucide-react';
-import { apiClient, DashboardStats } from '@/lib/api';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import {
+  FileCheck,
+  TrendingUp,
+  CheckCircle2,
+  BarChart3,
+  Upload,
+  Loader2,
+  AlertCircle,
+  ArrowRight,
+  FileSpreadsheet,
+} from "lucide-react";
+import { apiClient, DashboardStats } from "@/lib/api";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Dashboard() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
@@ -19,8 +36,8 @@ export default function Dashboard() {
         const dashboardStats = await apiClient.getDashboardStats();
         setStats(dashboardStats);
       } catch (err) {
-        setError('Failed to load dashboard statistics');
-        console.error('Dashboard error:', err);
+        setError("Failed to load dashboard statistics");
+        console.error("Dashboard error:", err);
       } finally {
         setLoading(false);
       }
@@ -104,10 +121,10 @@ export default function Dashboard() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-4xl font-bold mb-1">{stats?.totalBatches || 0}</div>
-            <p className="text-sm text-muted-foreground">
-              Processed batches
-            </p>
+            <div className="text-4xl font-bold mb-1">
+              {stats?.totalBatches || 0}
+            </div>
+            <p className="text-sm text-muted-foreground">Processed batches</p>
           </CardContent>
         </Card>
 
@@ -121,7 +138,9 @@ export default function Dashboard() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-4xl font-bold mb-1">{stats?.totalScanned || 0}</div>
+            <div className="text-4xl font-bold mb-1">
+              {stats?.totalScanned || 0}
+            </div>
             <p className="text-sm text-muted-foreground">
               OMR sheets processed
             </p>
@@ -160,51 +179,120 @@ export default function Dashboard() {
             <div className="text-4xl font-bold text-purple-600 mb-1">
               {stats?.averageScore.toFixed(1) || 0}
             </div>
-            <p className="text-sm text-muted-foreground">
-              Out of 100 marks
-            </p>
+            <p className="text-sm text-muted-foreground">Out of 100 marks</p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Actions Section */}
-      <div className="grid gap-6 md:grid-cols-2 mb-12">
-        <Card className="border-2 border-dashed hover:border-primary transition-colors">
-          <CardHeader>
-            <CardTitle className="text-xl">Upload New Batch</CardTitle>
-            <CardDescription className="text-base">
-              Process OMR sheets by uploading multiple images
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button className="w-full" size="lg" asChild>
-              <Link href="/upload">
-                <Upload className="mr-2 h-5 w-5" />
-                Upload Batch
-              </Link>
-            </Button>
-          </CardContent>
-        </Card>
+      {/* Tabs for Actions Section */}
+      <Tabs defaultValue="omr" className="mb-12">
+        <TabsList className="grid w-full max-w-md grid-cols-2">
+          <TabsTrigger value="omr" className="text-base">
+            <Upload className="mr-2 h-4 w-4" />
+            OMR Upload
+          </TabsTrigger>
+          <TabsTrigger value="excel" className="text-base">
+            <FileSpreadsheet className="mr-2 h-4 w-4" />
+            Excel Answers
+          </TabsTrigger>
+        </TabsList>
 
-        <Card className="border-2">
-          <CardHeader>
-            <CardTitle className="text-xl">Processing Statistics</CardTitle>
-            <CardDescription className="text-base">
-              Current system metrics
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex items-center justify-between text-base">
-              <span className="text-muted-foreground">Failed Sheets</span>
-              <span className="font-semibold font-mono">{stats?.totalFailed || 0}</span>
-            </div>
-            <div className="flex items-center justify-between text-base">
-              <span className="text-muted-foreground">Success Rate</span>
-              <span className="font-semibold text-green-600 font-mono">{stats?.successRate.toFixed(1) || 0}%</span>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+        <TabsContent value="omr" className="mt-6">
+          <div className="grid gap-6 md:grid-cols-2">
+            <Card className="border-2 border-dashed hover:border-primary transition-colors">
+              <CardHeader>
+                <CardTitle className="text-xl">Upload New Batch</CardTitle>
+                <CardDescription className="text-base">
+                  Process OMR sheets by uploading multiple images
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button className="w-full" size="lg" asChild>
+                  <Link href="/upload">
+                    <Upload className="mr-2 h-5 w-5" />
+                    Upload Batch
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2">
+              <CardHeader>
+                <CardTitle className="text-xl">Processing Statistics</CardTitle>
+                <CardDescription className="text-base">
+                  Current system metrics
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center justify-between text-base">
+                  <span className="text-muted-foreground">Failed Sheets</span>
+                  <span className="font-semibold font-mono">
+                    {stats?.totalFailed || 0}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-base">
+                  <span className="text-muted-foreground">Success Rate</span>
+                  <span className="font-semibold text-green-600 font-mono">
+                    {stats?.successRate.toFixed(1) || 0}%
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="excel" className="mt-6">
+          <div className="grid gap-6 md:grid-cols-2">
+            <Card className="border-2 border-dashed hover:border-primary transition-colors">
+              <CardHeader>
+                <CardTitle className="text-xl">Upload Answer Key</CardTitle>
+                <CardDescription className="text-base">
+                  Upload Excel file containing correct answers for evaluation
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button className="w-full" size="lg" asChild>
+                  <Link href="/upload/answers">
+                    <FileSpreadsheet className="mr-2 h-5 w-5" />
+                    Upload Excel
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2">
+              <CardHeader>
+                <CardTitle className="text-xl">Answer Key Format</CardTitle>
+                <CardDescription className="text-base">
+                  Required Excel structure
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="text-sm space-y-2">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5" />
+                    <span className="text-muted-foreground">
+                      Column A: Question numbers (1, 2, 3...)
+                    </span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5" />
+                    <span className="text-muted-foreground">
+                      Column B: Correct answers (A, B, C, D)
+                    </span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5" />
+                    <span className="text-muted-foreground">
+                      Save as .xlsx or .xls format
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
 
       {/* Recent Batches */}
       <Card>
@@ -227,24 +315,30 @@ export default function Dashboard() {
                       <FileCheck className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <div className="font-semibold text-base font-mono mb-1">{batch.batchId}</div>
+                      <div className="font-semibold text-base font-mono mb-1">
+                        {batch.batchId}
+                      </div>
                       <div className="text-sm text-muted-foreground">
-                        {batch.fileCount} files • {new Date(batch.createdAt).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric'
+                        {batch.fileCount} files •{" "}
+                        {new Date(batch.createdAt).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
                         })}
                       </div>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    <div className={`inline-flex items-center rounded-full px-3 py-1.5 text-sm font-semibold ${batch.status === 'completed'
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                        : batch.status === 'processing'
-                          ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
-                          : 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400'
-                      }`}>
-                      {batch.status === 'processing' && (
+                    <div
+                      className={`inline-flex items-center rounded-full px-3 py-1.5 text-sm font-semibold ${
+                        batch.status === "completed"
+                          ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
+                          : batch.status === "processing"
+                            ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
+                            : "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400"
+                      }`}
+                    >
+                      {batch.status === "processing" && (
                         <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
                       )}
                       {batch.status}
@@ -265,7 +359,8 @@ export default function Dashboard() {
                 </div>
                 <h3 className="font-semibold text-2xl mb-2">No batches yet</h3>
                 <p className="text-base text-muted-foreground mb-6 max-w-md">
-                  Get started by uploading your first OMR batch for automatic processing and grading
+                  Get started by uploading your first OMR batch for automatic
+                  processing and grading
                 </p>
                 <Button size="lg" asChild>
                   <Link href="/upload">

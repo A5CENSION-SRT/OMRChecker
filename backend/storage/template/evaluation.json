@@ -111,27 +111,27 @@
       "A",
       "A",
       "A",
-      "A",
-      "A",
-      "A",
-      "A",
-      "A",
-      "A",
-      "A",
-      "A",
-      "A",
-      "B",
-      "B",
-      "B",
-      "B"
+      "D",
+      "D",
+      "D",
+      "D",
+      "D",
+      "D",
+      "D",
+      "D",
+      "D",
+      "D",
+      "D",
+      "D",
+      "D"
     ],
-    "should_explain_scoring": false
+    "should_explain_scoring": true
   },
   "marking_schemes": {
     "DEFAULT": {
-      "correct": 1,
-      "incorrect": 0,
-      "unmarked": 0
+      "correct": "1",
+      "incorrect": "0",
+      "unmarked": "0"
     }
   }
 }

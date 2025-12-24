@@ -57,6 +57,7 @@ async def root():
         "version": "1.0.0",
         "endpoints": {
             "upload": "POST /api/omr/upload",
+            "uploadexcel": "POST /api/omr/uploadexcel",
             "status": "GET /api/omr/status/{batchId}",
             "results": "GET /api/omr/results/{batchId}",
             "download": "GET /api/omr/download/{batchId}",
@@ -75,5 +76,10 @@ if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run(
-        "backend.main:app", host="0.0.0.0", port=8000, reload=True, log_level="info"
+        "backend.main:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True,
+        reload_dirs=["backend", "config", "backend/storage/template"],
+        log_level="info",
     )
