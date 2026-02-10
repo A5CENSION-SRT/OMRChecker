@@ -1,58 +1,126 @@
 {
-  "pageDimensions": [595, 841],
-  "bubbleDimensions": [10, 10],
+  "pageDimensions": [
+    595,
+    841
+  ],
+  "bubbleDimensions": [
+    10,
+    10
+  ],
   "customLabels": {
-    "subjectcode": ["subject1..3"],
-    "rollNumber": ["roll1..10"]
+    "rollNumber": ["rollYear", "rollStream1", "rollStream2", "roll1..3"]
   },
   "fieldBlocks": {
     "MCQBlock1": {
       "fieldType": "QTYPE_MCQ4",
-      "origin": [104, 350],
-      "fieldLabels": ["q1..15"],
-      "bubblesGap": 15.1,
-      "labelsGap": 28.8
+      "origin": [
+        78,
+        523
+      ],
+      "fieldLabels": [
+        "q1..15"
+      ],
+      "bubblesGap": 18.8,
+      "labelsGap": 19.4
     },
 
-    "MCQBlock2": {
+     "MCQBlock2": {
       "fieldType": "QTYPE_MCQ4",
-      "origin": [220, 350],
-      "fieldLabels": ["q16..30"],
-      "bubblesGap": 15.1,
-      "labelsGap": 28.8
+      "origin": [
+        211,
+        523
+      ],
+      "fieldLabels": [
+        "q16..30"
+      ],
+      "bubblesGap": 18.8,
+      "labelsGap": 19.4
     },
 
     "MCQBlock3": {
       "fieldType": "QTYPE_MCQ4",
-      "origin": [336, 350],
-      "fieldLabels": ["q31..45"],
-      "bubblesGap": 15.1,
-      "labelsGap": 28.8
+      "origin": [
+        342,
+        523
+      ],
+      "fieldLabels": [
+        "q31..45"
+      ],
+      "bubblesGap": 18.8,
+      "labelsGap": 19.4
     },
+
 
     "MCQBlock4": {
       "fieldType": "QTYPE_MCQ4",
-      "origin": [450, 350],
-      "fieldLabels": ["q46..60"],
-      "bubblesGap": 15.1,
-      "labelsGap": 28.8
+      "origin": [
+        468,
+        523
+      ],
+      "fieldLabels": [
+        "q46..60"
+      ],
+      "bubblesGap": 18.8,
+      "labelsGap": 19.4
+    },
+
+    "rollStream1": {
+      "origin": [
+        210,
+        315
+      ],
+      "direction": "vertical",
+      "bubblesGap": 15.8,
+      "bubbleValues": ["CS", "CY", "CD", "AI", "AS", "BT", "CH", "CV", "EC", "EE"],
+      "fieldLabels": ["rollStream1"],
+      "labelsGap": 0
+    },
+
+    "rollStream2": {
+      "origin": [
+        262,
+        315
+      ],
+      "direction": "vertical",
+      "bubblesGap": 15.8,
+      "bubbleValues": ["EI", "IM", "IS", "ME", "ET"],
+      "fieldLabels": ["rollStream2"],
+      "labelsGap": 0
+    }, 
+
+    "rollYear": {
+      "origin": [
+        340,
+        325
+      ],
+      "direction": "vertical",
+      "bubblesGap": 22,
+      "bubbleValues": ["20", "21", "22", "23", "24", "25"],
+      "fieldLabels": ["rollYear"],
+      "labelsGap": 0  
     },
 
     "rollNumber": {
       "fieldType": "QTYPE_INT",
-      "origin": [46, 162],
-      "bubblesGap": 14.7,
-      "labelsGap": 14.5,
-      "fieldLabels": ["roll1..10"]
-    },
-
-    "subjectcode": {
-      "fieldType": "QTYPE_INT",
-      "origin": [220, 162],
-      "bubblesGap": 14.7,
-      "labelsGap": 33,
-      "fieldLabels": ["subject1..3"]
+      "origin": [
+        463,
+        313
+      ],
+      "bubblesGap": 15.6,
+      "labelsGap": 15,
+      "fieldLabels": [
+        "roll1..3"
+      ]
     }
   },
-  "preProcessors": []
+  "preProcessors": [
+    
+    {
+      "name": "CropOnMarkers",
+      "options": {
+        "relativePath": "omr_marker.jpg",
+        "sheetToMarkerWidthRatio":17
+      }
+    }
+  ]
 }

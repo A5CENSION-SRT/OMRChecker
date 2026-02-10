@@ -101,7 +101,7 @@ class OMRProcessor:
             
             # Get concatenated responses
             omr_response = get_concatenated_response(response_dict, self.template)
-
+            omr_response["rollNumber"] = "1RV" + omr_response["rollNumber"]
             print("YO ROLL NUMBER SPOFJPSODJFPSDJFPOSJD PFSPDOFJPSO  ", omr_response)
             
             # Evaluate if answer key exists
@@ -144,14 +144,9 @@ class OMRProcessor:
                 "rollNumber": omr_response.get("rollNumber", ""),
                 "responses": omr_response,
                 "evaluatedResponses": evaluated_responses,
-                "totalQuestions": total_questions,
-                "correct": correct,
-                "incorrect": incorrect,
-                "unmarked": unmarked,
                 "score": round(score, 2),
                 "maxScore": max_score,
                 "percentage": round((score / max_score * 100) if max_score > 0 else 0, 2),
-                "markedImagePath": str(marked_image_path.relative_to(marked_image_path.parent.parent)) if marked_image_path else "",
                 "multiMarked": multi_marked > 0,
                 "processedAt": datetime.now().isoformat()
             }

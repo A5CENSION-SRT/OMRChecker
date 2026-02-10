@@ -23,6 +23,12 @@ export function ResultsTable({
         )
       : 0;
 
+  const maxSc = results.length > 0
+    ? Math.round(
+        results.reduce((sum, r) => sum + (r.score * 100) / r.percentage, 0) /
+          results.length,
+      )
+    : 0;
   return (
     <div className="space-y-6">
       {/* Summary Stats */}
@@ -43,7 +49,7 @@ export function ResultsTable({
         </div>
         <div className="bg-white p-4 rounded-lg border">
           <div className="text-2xl font-bold text-blue-600">
-            {averageScore}/100
+            {averageScore}/{maxSc}
           </div>
           <div className="text-sm text-gray-500">Average Score</div>
         </div>
