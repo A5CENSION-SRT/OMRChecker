@@ -16,3 +16,6 @@ OMRChecker.wiki/
 storr
 test_data_omr/
 backend/storage/archive/*
+
+backend_server.log
+backend_server.pid

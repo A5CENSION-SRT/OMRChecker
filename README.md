@@ -12,7 +12,7 @@ python main.py
 frontend (localhost:3000): 
 
 ```sh
-cd omrfront
+cd frontend
 npm run dev
 ```
 
