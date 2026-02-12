@@ -31,10 +31,15 @@ def initialize_results_csv():
             "batchId",
             "fileName",
             "rollNumber",
+            "totalQuestions",
+            "correct",
+            "incorrect",
+            "unmarked",
             "score",
             "maxScore",
             "percentage",
             "responses",
+            "markedImagePath",
             "status",
             "createdAt",
             "error"
@@ -87,15 +92,34 @@ def append_result_to_csv(batch_id: str, result: Dict):
         "batchId": batch_id,
         "fileName": result.get("fileName", ""),
         "rollNumber": result.get("rollNumber", ""),
+        "totalQuestions": result.get("totalQuestions", 0),
+        "correct": result.get("correct", 0),
+        "incorrect": result.get("incorrect", 0),
+        "unmarked": result.get("unmarked", 0),
         "score": result.get("score", 0),
         "maxScore": result.get("maxScore", 0),
         "percentage": result.get("percentage", 0),
         "responses": json.dumps(ordered_responses, ensure_ascii=False),
+        "markedImagePath": result.get("markedImagePath", ""),
         "status": result.get("status", "unknown"),
         "createdAt": result.get("processedAt", datetime.now().isoformat()),
         "error": result.get("error", "")
     }
     
+
+    # row = {
+    #     "batchId": batch_id,
+    #     "createdAt": result.get("processedAt", datetime.now().isoformat()),
+    #     "fileName": result.get("fileName", ""),
+    #     "rollNumber": result.get("rollNumber", ""),
+    #     "score": result.get("score", 0),
+    #     "maxScore": result.get("maxScore", 0),
+    #     "percentage": result.get("percentage", 0),
+    #     "responses": json.dumps(ordered_responses, ensure_ascii=False),
+    #     "status": result.get("status", "unknown"),
+    #     "error": result.get("error", "")
+    # }
+
     logger.info(f"   📝 CSV Row: Batch={batch_id}, File={row['fileName']}, Score={row['score']}/{row['maxScore']}, Status={row['status']}")
     
     # Append to CSV
@@ -233,7 +257,7 @@ def get_dashboard_stats() -> Dict:
     # Average score (only completed)
     completed_df = df[df["status"] == "completed"]
     if not completed_df.empty and 'score' in completed_df.columns:
-        avg_score = completed_df["score"].mean()
+        avg_score = pd.to_numeric(completed_df["score"], errors='coerce').mean()
         average_score = avg_score if pd.notna(avg_score) and avg_score != float('inf') else 0
     else:
         average_score = 0

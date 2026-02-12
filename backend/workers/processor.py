@@ -103,6 +103,7 @@ async def process_batch_worker():
                     
                     # Append to CSV
                     logger.info(f"💾 Saving result to CSV for: {Path(image_path).name}")
+                    logger.critical("resilt:  ", result)
                     append_result_to_csv(batch_id, result)
                     
                     # Update counts

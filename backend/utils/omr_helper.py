@@ -43,6 +43,20 @@ class OMRProcessor:
                 self.tuning_config
             )
     
+    def check_usn(self, usn: str) -> str:
+        message = ""
+
+        if len(usn) > 10:
+            message = "Error: USN has more than 10 digits"
+
+        elif len(usn) < 10:
+            message = "Error: USN has lesse than 10 digits"
+
+        elif usn == "":
+            message = "Error: USN is empty"
+        
+        return message
+
     def process_omr_image(
         self, 
         image_path: Path,
@@ -126,10 +140,19 @@ class OMRProcessor:
                 evaluated_responses = self._evaluate_responses(omr_response)
             
             # Count response statistics
-            total_questions = len(omr_response)
+            total_questions = len(omr_response) - 1
+
             correct = sum(1 for r in evaluated_responses.values() if r.get("verdict") == "correct")
             incorrect = sum(1 for r in evaluated_responses.values() if r.get("verdict") == "incorrect")
             unmarked = sum(1 for v in omr_response.values() if v == "" or v is None)
+            print("--------------------------------------------------------------")
+            print("total = ", total_questions)
+            print("correct = ", correct)
+            print("incorrect = ", incorrect)
+            print("unmarked = ", unmarked)
+            print("evaluated resp = ", evaluated_responses)
+
+            print("--------------------------------------------------------------")
             
             # Save marked image path
             marked_image_path = None
@@ -142,13 +165,18 @@ class OMRProcessor:
                 "status": "completed",
                 "fileName": image_path.name,
                 "rollNumber": omr_response.get("rollNumber", ""),
+                "totalQuestions": total_questions,
+                "correct": correct,
+                "incorrect": incorrect,
+                "unmarked": unmarked,
                 "responses": omr_response,
                 "evaluatedResponses": evaluated_responses,
                 "score": round(score, 2),
                 "maxScore": max_score,
                 "percentage": round((score / max_score * 100) if max_score > 0 else 0, 2),
                 "multiMarked": multi_marked > 0,
-                "processedAt": datetime.now().isoformat()
+                "processedAt": datetime.now().isoformat(),
+                "error": self.check_usn(omr_response.get("rollNumber", ""))
             }
             
         except Exception as e:
@@ -184,14 +212,24 @@ class OMRProcessor:
         
         if not self.evaluation_config:
             return evaluated
+
+        question_to_answer_matcher = self.evaluation_config.question_to_answer_matcher
         
-        # This is a simplified version - full implementation would use evaluation config
+        # Evaluate each response using the answer matcher
         for question, marked_answer in omr_response.items():
+            if question not in question_to_answer_matcher:
+                # Skip if no answer key for this question
+                continue
+
+            answer_matcher = question_to_answer_matcher[question]
+            question_verdict, delta = answer_matcher.get_verdict_marking(marked_answer)
+
             evaluated[question] = {
                 "marked": marked_answer,
-                "correct": "",  # Would come from answer key
-                "verdict": "unknown",
-                "score": 0
+                "correct": str(answer_matcher.answer_item),
+                "verdict": question_verdict,
+                "score": delta,
+                "answerType": answer_matcher.answer_type
             }
         
         return evaluated

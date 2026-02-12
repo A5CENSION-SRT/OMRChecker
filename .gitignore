@@ -15,3 +15,4 @@ OMRChecker.wiki/
 
 storr
 test_data_omr/
+backend/storage/archive/*

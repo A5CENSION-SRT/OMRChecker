@@ -35,6 +35,18 @@ from backend.workers.processor import (
     process_batch_worker,
     queue_batch_processing,
 )
+import math
+
+
+def _to_number(value, default=0.0):
+    """Safely convert value to float; return default for non-numeric or NaN/inf."""
+    try:
+        n = float(value)
+        if not math.isfinite(n):
+            return float(default)
+        return n
+    except Exception:
+        return float(default)
 
 # Get logger (configured in main.py)
 logger = logging.getLogger(__name__)
@@ -273,26 +285,32 @@ async def get_results(batch_id: str):
     failure_count = sum(1 for r in results if r["status"] == "failed")
 
     # Average score (only for completed)
-    completed_results = [r for r in results if r["status"] == "completed"]
-    average_score = (
-        sum(r["score"] for r in completed_results) / len(completed_results)
-        if completed_results
-        else 0
-    )
+    completed_results = [r for r in results if r.get("status") == "completed"]
+    # Safely coerce scores to floats, ignoring non-numeric/NaN values
+    numeric_scores = []
+    for r in completed_results:
+        try:
+            s = float(r.get("score", 0))
+            if math.isfinite(s):
+                numeric_scores.append(s)
+        except Exception:
+            # ignore non-convertible values
+            continue
+
+    average_score = (sum(numeric_scores) / len(numeric_scores)) if numeric_scores else 0
 
     # Simplify results for response
-    simplified_results = [
-        {
-            "fileName": r["fileName"],
-            "rollNumber": r["rollNumber"],
-            "score": r["score"],
-            "maxScore": r["maxScore"],
-            "percentage": r["percentage"],
-            "status": r["status"],
+    simplified_results = []
+    for r in results:
+        simplified_results.append({
+            "fileName": r.get("fileName", ""),
+            "rollNumber": r.get("rollNumber", ""),
+            "score": _to_number(r.get("score", 0)),
+            "maxScore": _to_number(r.get("maxScore", 0)),
+            "percentage": _to_number(r.get("percentage", 0)),
+            "status": r.get("status", ""),
             "error": r.get("error", ""),
-        }
-        for r in results
-    ]
+        })
 
     return {
         "batchId": batch_id,
